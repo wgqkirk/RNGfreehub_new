@@ -1,0 +1,75 @@
+{% extends 'login_base.html' %}
+
+{% block body %}
+<div class="login">
+    <!-- HEADER -->
+    <header class="signup__header">
+        <div class="container">
+            <div class="signup__header-content">
+                <p><a href="#">无账号？</a></p>
+                <a href="/signup.html" class="btn">注册</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="signup__main">
+        <img class="signup__bg" src="{{ static_url('images/signup-bg.png')}}" alt="bg">
+        <div class="container">
+            <form method="post" action="/login.html">
+            <div class="signup__container">
+                <div class="signup__logo">
+                    <a href="#"><img src="{{ static_url('fonts/icons/main/RNG.png')}}" alt="logo">NG</a>
+                </div>
+
+                <div class="signup__head">
+                    <h3>欢迎来到RNG's free hub</h3>
+                    <p></p>
+                </div>
+                <div class="signup__form">
+
+                    <div class="signup__section">
+                        <label class="signup__label" for="credential">账号</label>
+                        <input type="text" class="form-control" name="credential" id="credential" placeholder="手机号">
+                    </div>
+                    <!--<div class="signup__section">-->
+                        <!--<label class="signup__label" for="email">Emain Address</label>-->
+                        <!--<input type="text" class="form-control" id="email" value="Jane326@gmail.com">-->
+                    <!--</div>-->
+                    <div class="signup__section">
+                        <label class="signup__label" for="password">密码</label>
+                        <div class="message-input">
+                            <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码">
+                            <span class="message-input__strong">strong</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="signup__btn-create btn btn--type-02">登录</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="signup__footer">
+        <div class="container">
+            <div class="signup__footer-content">
+                <ul class="signup__footer-menu">
+                    <li><a href="#">Teams</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Send Feedback</a></li>
+                </ul>
+                <ul class="signup__footer-social">
+                    <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-cloud" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+{% end %}

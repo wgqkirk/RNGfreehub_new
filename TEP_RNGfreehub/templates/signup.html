@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta name="keywords" content="RNG">
+    <meta name="description" content="RNG free hub">
+    <meta name="author" content="author.com">
+    <link rel="icon" href="../icon.png">
+	
+    <title>RNG free hub</title>
+
+    <!-- STYLESHEET -->
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
+
+    <!-- icon -->
+    <link rel="stylesheet" href="../fonts/icons/main/mainfont/style.css">
+    <link rel="stylesheet" href="../fonts/icons/font-awesome/css/font-awesome.min.css">
+
+    <!-- Vendor -->
+    <link rel="stylesheet" href="../vendor/bootstrap/v3/bootstrap.min.css">
+    <link rel="stylesheet" href="../vendor/bootstrap/v4/bootstrap-grid.css">
+    <!-- Custom -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="signup">
+    <!-- HEADER -->
+    <header class="signup__header">
+        <div class="container">
+            <div class="signup__header-content">
+                <p><a href="#">已有账号？</a></p>
+                <a href="login.html" class="btn">登录</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="signup__main">
+        <img class="signup__bg" src="../images/signup-bg.png" alt="bg">
+
+        <div class="container">
+            <div class="signup__container">
+                <div class="signup__logo">
+                    <a href="#"><img src="../fonts/icons/main/RNG.png" alt="logo">NG</a>
+                </div>
+
+                <div class="signup__head">
+                    <h3>创建新账号</h3>
+                    <p></p>
+                </div>
+                <div class="signup__form"  id="content">
+                    <validator name="myForm">
+					<form>
+                    <div class="signup__section">
+                        <label class="signup__label" for="credential">手机号</label>
+						<div class="row">
+						<div class="col-xs-6">
+                        <input type="text" class="form-control" name="credential" id="credential" v-model="credential" @blur="changeMobile" placeholder="请输入手机号">
+						</div>
+						<div class="col-xs-6">
+						<span class="marphone" v-if="errMobile != ''">{{errMobile}}</span>
+                        <span class="marcode" v-if="datamobile">{{datamobile}}</span>
+						</div>
+						</div>
+
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="sms_code">验证码</label>
+                        <div class="row">
+                        <div class="col-xs-4">
+                        <input type="text" class="form-control" name="sms_code" id="sms_code" v-model="sms_code" placeholder="点击获取短信验证码" initial='off' v-validate:code="{required:true,minlength:6,maxlength:6 }">
+                        </div>
+                        <div class="col-xs-4">
+						<span class="marcode" v-if="$myForm.code.maxlength">请填写6位数的验证码</span>
+						<span class="marcode" v-if="$myForm.code.minlength">请填写6位数的验证码</span>
+						<span class="marcode" v-if="datacode">{{datacode}}</span>
+						</div>
+						<div class="col-xs-4">
+                        <button type="button" class="get_msm" @click="getCode" v-if="getCodes" id="getverify">获取短信验证码</button>
+						<span class="get_msm2" v-if="countDown" v-cloak >{{countDown}}s 后可重新发送</span>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="nickname">昵称</label>
+						<div class="row">
+						<div class="col-xs-6">
+                        <input type="text" class="form-control" name="nickname" id="nickname" @blur="changeNickname" v-model="nickname" placeholder="请输入昵称" initial='off' v-validate:nickname="{required:true,minlength:2,maxlength:10 }">
+						</div>
+						<div class="col-xs-6">
+						<span class="marcode" v-if="$myForm.nickname.maxlength">请输入2到10位的昵称</span>
+						<span class="marcode" v-if="$myForm.nickname.minlength">请输入2到10位的昵称</span>
+						<span class="marcode" v-if="dataNickname">{{dataNickname}}</span>
+						</div>
+						</div>
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="email">邮箱</label>
+						<div class="row">
+							<div class="col-xs-6">
+								<input type="text" class="form-control" name="email" id="email" v-model="email" placeholder="请输入正确邮箱">
+							</div>
+							<div class="col-xs-6">
+								<span class="marcode" v-if="dataemail">{{dataemail}}</span>
+							</div>
+						</div>
+                        
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="password">密码</label>
+                        <div class="message-input">
+							<div class="row">
+								<div class="col-xs-6">
+									<input type="password" class="form-control" name="password" id="password" v-model="password"  initial='off' v-validate:password="{required:true,minlength:6,maxlength:16 }">
+								</div>
+								<div class="col-xs-6">
+									<span class="marcode" v-if="$myForm.password.maxlength">请输入6到16位的密码</span>
+									<span class="marcode" v-if="$myForm.password.minlength">请输入6到16位的密码</span>
+									<span class="marcode" v-if="datamobile">{{dataPassword}}</span>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                    <div class="signup__checkbox">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="signup__box">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" checked="checked">
+                                        <i></i>
+                                    </label>
+                                    <span>同意条款</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6" data-visible="desktop">
+                                <label class="signup__box">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox">
+                                        <i></i>
+                                    </label>
+                                    <span>新消息推送</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="button" @click="submit" class="signup__btn-create btn btn--type-02" value="创建">
+                </form>
+				</validator>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="signup__footer">
+        <div class="container">
+            <div class="signup__footer-content">
+                <ul class="signup__footer-menu">
+                    <li><a href="#">Teams</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Send Feedback</a></li>
+                </ul>
+                <ul class="signup__footer-social">
+                    <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-cloud" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+	
+	<script src="../vendor/jquery/jquery.min.js"></script>
+	<script src="../vendor/velocity/velocity.min.js"></script>
+	<script src="https://unpkg.com/vue@1.0.26/dist/vue.min.js"></script>
+	<script src="https://cdn.bootcss.com/vue-validator/2.1.3/vue-validator.js"></script>
+	<script src="../js/axios.js"></script>
+	<script src="../js/register.js"></script>
+	<script src="../js/app.js"></script>
+</body>
+</html>

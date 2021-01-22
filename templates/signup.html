@@ -1,0 +1,154 @@
+{% extends 'login_base.html' %}
+
+{% block body %}
+<div class="signup">
+    <!-- HEADER -->
+    <header class="signup__header">
+        <div class="container">
+            <div class="signup__header-content">
+                <p><a href="#">已有账号？</a></p>
+                <a href="/login.html" class="btn">登录</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="signup__main">
+        <img class="signup__bg" src="{{ static_url('images/signup-bg.png')}}" alt="bg">
+
+        <div class="container">
+            <div class="signup__container">
+                <div class="signup__logo">
+                    <a href="#"><img src="{{ static_url('fonts/icons/main/RNG.png')}}" alt="logo">NG</a>
+                </div>
+
+                <div class="signup__head">
+                    <h3>创建新账号</h3>
+                    <p></p>
+                </div>
+                <div class="signup__form">
+                    <form method="post" action="/signup.html">
+                    <div class="signup__section">
+                        <label class="signup__label" for="credential">手机号</label>
+                        <input type="text" class="form-control" name="credential" id="credential" placeholder="请输入手机号">
+
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="sms_code">验证码</label>
+                        <div class="row">
+                        <div class="col-md-6">
+                        <input type="text" class="form-control" name="sms_code" id="sms_code">
+                        </div>
+                        <div class="col-md-6">
+                        <button type="button" class="get_msm" id="get_sms">获取短信验证码</button>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="nickname">昵称</label>
+                        <input type="text" class="form-control" name="nickname" id="nickname" placeholder="请输入昵称">
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="email">邮箱</label>
+                        <input type="text" class="form-control" name="email" id="email" placeholder="请输入正确邮箱">
+                    </div>
+                    <div class="signup__section">
+                        <label class="signup__label" for="password">密码</label>
+                        <div class="message-input">
+                            <input type="password" class="form-control" name="password" id="password" placeholder='*******'>
+                            <span class="message-input__strong">strong</span>
+                        </div>
+                    </div>
+                    <div class="signup__checkbox">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="signup__box">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" checked="checked">
+                                        <i></i>
+                                    </label>
+                                    <span>同意条款</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6" data-visible="desktop">
+                                <label class="signup__box">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox">
+                                        <i></i>
+                                    </label>
+                                    <span>新消息推送</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="signup__btn-create btn btn--type-02">创建</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="signup__footer">
+        <div class="container">
+            <div class="signup__footer-content">
+                <ul class="signup__footer-menu">
+                    <li><a href="#">Teams</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Send Feedback</a></li>
+                </ul>
+                <ul class="signup__footer-social">
+                    <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-cloud" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+{% end %}
+
+{% block js %}
+<script>
+    var code = ""; //接收验证码
+$('#get_sms').click(function(){
+  var count = 60;
+    var phone=$("#credential").val();//手机号码
+    var reg_phone = /1\d{10}/;
+    if(!reg_phone.test(phone)){   //验证手机是否符合格式
+        alert("填写手机号");
+        return false;
+    }
+    //开始计时
+
+    $("#get_sms").addClass('sms_disabled');
+    $("#get_sms").removeClass('get_msm');
+    $("#get_sms").attr("disabled",'disabled');
+    $("#get_sms").html("已发送，倒计时" + count + "秒");
+    var timer = setInterval(function(){
+      count--;
+      $("#get_sms").html("已发送，倒计时" + count + "秒");
+      if (count==0) {
+        clearInterval(timer);
+        $("#get_sms").attr("disabled",false);//启用按钮
+        $("#get_sms").addClass("get_msm");//启用样式
+        $("#get_sms").removeClass('sms_disabled');//关闭样式
+        $("#get_sms").html("重新发送验证码");
+      }
+    },1000);
+
+    //向后台发送处理数据
+    $.ajax({
+        type: "POST", //用POST方式传输
+        dataType: "json", //数据格式:JSON
+        url: '/api/v1/sendSms/', //目标地址
+        data: "phone=" + phone ,
+        error: function (XMLHttpRequest, textStatus, errorThrown) { },
+        success: function (msg){ }
+    });
+});
+</script>
+{% end %}

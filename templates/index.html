@@ -1,0 +1,159 @@
+{% extends 'post_base.html'%}
+
+{% block main %}
+<!-- MAIN -->
+    <main>
+        <div class="container">
+            <div class="nav">
+                <div class="nav__categories js-dropdown">
+                    <div class="nav__select">
+                        <div class="btn-select" data-dropdown-btn="categories">分类</div>
+                        <nav class="dropdown dropdown--design-01" data-dropdown-list="categories">
+                            <ul class="dropdown__catalog row">
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-f9bc64"></i>兴趣</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-348aa7"></i>社会</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-4436f8"></i>视频</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-5dd39e"></i>随便</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-ff755a"></i>艺术</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-bce784"></i>技术</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-83253f"></i>游戏</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-c49bbb"></i>科学</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-3ebafa"></i>经验</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-c6b38e"></i>宠物</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-a7cdbd"></i>娱乐</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-525252"></i>教育</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-777da7"></i>求助</a></li>
+                                <li class="col-xs-6"><a href="#" class="category"><i class="bg-368f8b"></i>法律法规</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="nav__select">
+                        <div class="btn-select" data-dropdown-btn="tags">标签</div>
+                        <div class="dropdown dropdown--design-01" data-dropdown-list="tags">
+                            <div class="tags">
+                                <a href="#" class="bg-4f80b0">游戏</a>
+                                <a href="#" class="bg-424ee8">自然</a>
+                                <a href="#" class="bg-36b7d7">娱乐</a>
+                                <a href="#" class="bg-ef429e">自拍</a>
+                                <a href="#" class="bg-7cc576">相机</a>
+                                <!--<a href="#" class="bg-3a3a17">username</a>-->
+                                <a href="#" class="bg-6f7e9c">搞笑</a>
+                                <a href="#" class="bg-f26522">摄影</a>
+                                <a href="#" class="bg-a3d39c">户外</a>
+                                <a href="#" class="bg-92278f">冒险</a>
+                                <a href="#" class="bg-8781bd">白日梦</a>
+                                <a href="#" class="bg-f1ab32">生活</a>
+                                <a href="#" class="bg-3b96ca">真相</a>
+                                <a href="#" class="bg-348aa7">社会</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav__menu js-dropdown">
+                    <div class="nav__select">
+                        <div class="btn-select" data-dropdown-btn="menu">最新</div>
+                        <div class="dropdown dropdown--design-01" data-dropdown-list="menu">
+                            <ul class="dropdown__catalog">
+                                <li><a href="#">最新</a></li>
+                                <li><a href="#">未读</a></li>
+                                <li><a href="#">热门</a></li>
+                                <li><a href="#">最赞</a></li>
+                                <li><a href="#">关注</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="active"><a href="#">最新</a></li>
+                        <li><a href="#">未读</a></li>
+                        <li><a href="#">热门</a></li>
+                        <li><a href="#">最赞</a></li>
+                        <li><a href="#">我的关注</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="posts">
+                <div class="posts__head">
+                    <div class="posts__topic">主题</div>
+                    <div class="posts__category">分类</div>
+                    <div class="posts__users">发帖人</div>
+                    <div class="posts__replies">回复数</div>
+                    <div class="posts__views">浏览数</div>
+                    <div class="posts__activity">发帖时间</div>
+                </div>
+                <div class="posts__body">
+                    <div class="posts__item bg-fef2e0">
+                        <div class="posts__section-left">
+                            <div class="posts__topic">
+                                <div class="posts__content">
+                                    <a href="#">
+                                        <h3><i><img src="static/fonts/icons/main/Pinned.svg" alt="Pinned"></i>欢迎来到RNG小站</h3>
+                                    </a>
+                                    <p>严禁人肉、诱亮互刷、时政敏感帖，禁发募捐帖，勿信广告</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="posts__section-right">
+                            <div class="posts__users js-dropdown">
+                                <div>
+                                    <a href="#" class="avatar"><img src="{{ static_url('icon.png')}}" title="RNGM" data-dropdown-btn="user-b"></a>
+                                    <div class="posts__users-dropdown dropdown dropdown--user dropdown--reverse-y" data-dropdown-list="user-b">
+                                        <div class="dropdown__user">
+                                            <a href="#" class="dropdown__user-label bg-218380">B</a>
+                                            <div class="dropdown__user-nav">
+                                                <a href="#"><i class="icon-Add_User"></i></a>
+                                                <a href="#"><i class="icon-Message"></i></a>
+                                            </div>
+                                            <div class="dropdown__user-info">
+                                                <a href="#">Tesla Motors</a>
+                                                <p>Last post 4 hours ago. Joined Jun 1, 16</p>
+                                            </div>
+                                            <div class="dropdown__user-icons">
+                                                <a href="#"><img src="static/fonts/icons/badges/Intermediate.svg" alt="user-icon"></a>
+                                                <a href="#"><img src="static/fonts/icons/badges/Bot.svg" alt="user-icon"></a>
+                                                <a href="#"><img src="static/fonts/icons/badges/Animal_Lover.svg" alt="user-icon"></a>
+                                            </div>
+                                            <div class="dropdown__user-statistic">
+                                                <div>Threads - <span>1184</span></div>
+                                                <div>Posts - <span>5,863</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="posts__replies">66</div>
+                            <div class="posts__views">15.1k</div>
+                            <div class="posts__activity">11d</div>
+                        </div>
+                    </div>
+                    {% for post in res_data['street_list']['data']['list'] %}
+                    <div class="posts__item">
+                        <div class="posts__section-left">
+                            <div class="posts__topic">
+                                <div class="posts__content">
+                                    <a href="{{ post['post_url'] }}">
+                                        <h3>{{ post['title']}}</h3>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="posts__category"><a href="#" class="category"><i class="bg-ff755a"></i> Arts</a></div>
+                        </div>
+                        <div class="posts__section-right">
+                            <div class="posts__users">
+                                <div>
+                                    <a href="#" class="avatar"><img src="http://bkwft01.oss-cn-hangzhou.aliyuncs.com/upload/photographer/person/4c820c2c02d346048e2b474a0452750fDJ36NO.jpg" title=" {{ post['author'] }}"></a>
+                                </div>
+                            </div>
+                            <div class="posts__replies">{{ post['reply_num'] }}</div>
+                            <div class="posts__views">{{ post['page_views'] }}</div>
+                            <div class="posts__activity">{{ post['create_date'] }}</div>
+                        </div>
+                    </div>
+                    {% end for%}
+                </div>
+            </div>
+            {% raw res_data['page'] %}
+        </div>
+    </main>
+
+
+{% end %}
